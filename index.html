@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Profesional</title>
+    <!-- Font Awesome untuk icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- AOS untuk animasi scroll -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --text-color: #333;
+            --light-bg: #f9f9f9;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        /* Cover Section with Parallax */
+        .cover {
+            position: relative;
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: none;
+        }
+
+        .cover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('USTI COVER.jpg') no-repeat center center fixed;
+            background-size: cover;
+            transform: translateZ(0);
+            will-change: transform;
+            z-index: -1;
+            animation: gradientShift 10s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 120px;
+            height: auto;
+            animation: floatLogo 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));
+            z-index: 2;
+        }
+
+        @keyframes floatLogo {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .cover-content {
+            max-width: 1000px;
+            width: 90%;
+            padding: 20px;
+            margin: 0 auto;
+            text-align: center;
+            color: white;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease forwards;
+            z-index: 2;
+        }
+
+        .cover-content h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            background: linear-gradient(45deg, #fff, #f0f0f0);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: titleGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes titleGlow {
+            0%, 100% {
+                text-shadow: 0 0 10px rgba(255,255,255,0.5);
+            }
+            50% {
+                text-shadow: 0 0 20px rgba(255,255,255,0.8);
+            }
+        }
+
+        .cover-content p {
+            font-size: clamp(1.1rem, 2vw, 1.5rem);
+            opacity: 0.9;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            animation: fadeInUp 1s ease 0.5s forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            text-align: center;
+            animation: bounce 2s infinite;
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        .scroll-indicator i {
+            font-size: 2rem;
+            opacity: 0.8;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-20px);
+            }
+            60% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Parallax Effect on Scroll */
+        .parallax-scroll {
+            transform: none !important;
+        }
+
+        /* Add smooth scrolling to the whole page */
+        html {
+            scroll-behavior: smooth;
+            overflow-y: scroll;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        @media (max-width: 768px) {
+            .cover {
+                min-height: 80vh;
+            }
+
+            .logo {
+                width: 80px;
+            }
+
+            .cover-content h1 {
+                font-size: clamp(2rem, 4vw, 3rem);
+            }
+        }
+
+        /* Blog Section */
+        .blog-section {
+            padding: clamp(40px, 5vw, 80px) 20px;
+            background: var(--light-bg);
+            position: relative;
+            z-index: 2;
+        }
+
+        .blog-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: clamp(20px, 3vw, 30px);
+            padding: 0 15px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .blog-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            z-index: 2;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .blog-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-origin: center;
+            will-change: transform;
+        }
+
+        .blog-card:hover .blog-image {
+            transform: scale(1.05);
+        }
+
+        .blog-content {
+            padding: 15px 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .blog-content h2 {
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            color: var(--primary-color);
+        }
+
+        .blog-content p {
+            margin-bottom: 20px;
+            flex: 1;
+        }
+
+        .read-more {
+            display: inline-block;
+            padding: 10px 20px;
+            background: var(--secondary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            text-align: center;
+            margin-top: auto;
+        }
+
+        .read-more:hover {
+            background: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        /* Footer Section */
+        .footer {
+            background: var(--primary-color);
+            color: white;
+            padding: clamp(40px, 5vw, 60px) 20px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: clamp(30px, 4vw, 40px);
+            padding: 0 15px;
+        }
+
+        .footer-section {
+            padding: 20px;
+        }
+
+        .footer-section h3 {
+            font-size: clamp(1.25rem, 2vw, 1.5rem);
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--secondary-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid transparent;
+        }
+
+        .social-links a:before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
+            top: -50%;
+            left: -50%;
+            transform: rotate(45deg);
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover:before {
+            top: 100%;
+            left: 100%;
+        }
+
+        .social-links a.facebook {
+            background: #3b5998;
+            box-shadow: 0 4px 15px rgba(59, 89, 152, 0.3);
+        }
+
+        .social-links a.twitter {
+            background: #1DA1F2;
+            box-shadow: 0 4px 15px rgba(29, 161, 242, 0.3);
+        }
+
+        .social-links a.instagram {
+            background: #E1306C;
+            box-shadow: 0 4px 15px rgba(225, 48, 108, 0.3);
+        }
+
+        .social-links a.tiktok {
+            background: #000000;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px) rotate(360deg);
+            border-color: rgba(255,255,255,0.5);
+        }
+
+        /* Map */
+        .map-container {
+            width: 100%;
+            height: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .logo {
+                width: 80px;
+            }
+
+            .cover {
+                min-height: 60vh;
+            }
+
+            .blog-image {
+                height: 200px;
+            }
+
+            .footer-section {
+                text-align: center;
+            }
+
+            .footer-section h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .cover-content h1 {
+                font-size: 2rem;
+            }
+
+            .blog-card {
+                margin: 0 auto;
+                max-width: 100%;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Tambahan CSS untuk Navigation Menu */
+        .nav-section {
+            background: var(--primary-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 0 20px;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-menu li {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-menu li a {
+            color: white;
+            text-decoration: none;
+            padding: 20px 25px;
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .nav-menu li a i {
+            margin-left: 5px;
+        }
+
+        .nav-menu li a:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .nav-menu .active {
+            background: var(--secondary-color);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 15px;
+            position: absolute;
+            left: 0;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary-color);
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 0 0 5px 5px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            padding: 15px 20px;
+            display: block;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .dropdown-content a:hover {
+            background: var(--secondary-color);
+        }
+
+        @media (max-width: 968px) {
+            .nav-menu li a {
+                padding: 20px 15px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                justify-content: flex-start;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: -20px;
+                right: -20px;
+                background: var(--primary-color);
+                flex-direction: column;
+                align-items: center;
+                padding: 10px 0;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .nav-menu li {
+                width: 100%;
+            }
+
+            .nav-menu li a {
+                justify-content: center;
+                padding: 15px 20px;
+                width: 100%;
+            }
+
+            .dropdown-content {
+                position: static;
+                transform: none;
+                width: 100%;
+                box-shadow: none;
+                background: rgba(0,0,0,0.1);
+                animation: none;
+            }
+
+            .dropdown-content a {
+                padding: 12px 30px;
+            }
+        }
+
+        /* Tambahan CSS untuk card meta info */
+        .article-meta, .project-meta {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .article-meta span, .project-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .article-meta i, .project-meta i {
+            color: var(--secondary-color);
+        }
+
+        .blog-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .blog-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--secondary-color);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+            transform-origin: left;
+        }
+
+        .blog-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .blog-content h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--secondary-color);
+            transition: width 0.3s ease;
+        }
+
+        .blog-card:hover .blog-content h2::after {
+            width: 100px;
+        }
+
+        /* Update styling untuk CV card */
+        .cv-brief {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .cv-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            background: rgba(52, 152, 219, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .cv-item i {
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+            margin-top: 0;
+        }
+
+        .cv-item p {
+            margin: 0;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .cv-item strong {
+            color: var(--primary-color);
+            display: inline-block;
+            margin-right: 5px;
+            font-size: 0.9rem;
+        }
+
+        .read-more i {
+            margin-left: 5px;
+            transition: transform 0.3s ease;
+        }
+
+        .read-more:hover i {
+            transform: translateX(5px);
+        }
+    </style>
+</head>
+<body>
+    <!-- Cover Section -->
+    <section class="cover">
+        <img src="LOGO USTI.png" alt="Logo" class="logo">
+        <div class="cover-content" data-aos="fade-up">
+            <h1>Selamat Datang di Blog Saya</h1>
+            <p>Tempat berbagi pengetahuan dan pengalaman</p>
+        </div>
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- Navigation Menu -->
+    <nav class="nav-section">
+        <div class="nav-container">
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="active">Beranda</a></li>
+                <li><a href="tugas.html" >Materi Tugas</a></li>
+                <li><a href="about.html">Tentang Saya</a></li>
+               
+                <li><a href="#">Kontak</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Blog Section -->
+    <section class="blog-section">
+        <div class="blog-container">
+            <!-- Artikel Simpel -->
+            <article class="blog-card" data-aos="fade-up">
+                <img src="https://cdn-web.ruangguru.com/landing-pages/assets/hs/TB%20-%20Cara%20Belajar%20Efektif%20Menurut%20Penelitian-01.jpg" alt="Artikel" class="blog-image">
+                <div class="blog-content">
+                    <h2>Tips Belajar Efektif</h2>
+                    <p>Bagaimana cara belajar yang efektif di era digital? Temukan 5 tips sederhana yang bisa langsung kamu praktikkan untuk meningkatkan produktivitas belajarmu.</p>
+                    <div class="article-meta">
+                        <span><i class="far fa-clock"></i> 5 menit membaca</span>
+                        <span><i class="far fa-folder"></i> Pendidikan</span>
+                    </div>
+                    <a href="https://www.ruangguru.com/blog/cara-belajar-efektif" class="read-more">Baca Artikel</a>
+                </div>
+            </article>
+
+            <!-- Tugas Mahasiswa -->
+            <article class="blog-card" data-aos="fade-up" data-aos-delay="100">
+                <img src="img/tugas-image.jpeg" alt="Project Mahasiswa" class="blog-image">
+                <div class="blog-content">
+                    <h2>Infrastruktur Teknologi Informasi</h2>
+                    <p>Implementasi dan analisis infrastruktur jaringan berbasis cloud computing dengan fokus pada keamanan dan skalabilitas sistem.</p>
+                    <div class="project-meta">
+                        <span><i class="fas fa-user-graduate"></i> Tugas Akhir</span>
+                        <span><i class="fas fa-star"></i> Semester 3</span>
+                    </div>
+                    <a href="tugas.html" class="read-more">Lihat Detail</a>
+                </div>
+            </article>
+
+           
+
+            <!-- CV Singkat -->
+            <article class="blog-card" data-aos="fade-up" data-aos-delay="200">
+                <img src="img/pp.JPG" alt="Profil" class="blog-image">
+                <div class="blog-content">
+                    <h2>Curriculum Vitae</h2>
+                    <div class="cv-brief">
+                        <div class="cv-item">
+                            <i class="fas fa-user-circle"></i>
+                            <p><strong>Nama:</strong> Zeltia Guustadri</p>
+                        </div>
+                        <div class="cv-item">
+                            <i class="fas fa-graduation-cap"></i>
+                            <p><strong>Pendidikan:</strong> Sistem Informasi - USTI</p>
+                        </div>
+                        <div class="cv-item">
+                            <i class="fas fa-briefcase"></i>
+                            <p><strong>Keahlian:</strong> Web Development</p>
+                        </div>
+                    </div>
+                    <a href="about.html" class="read-more">Lihat CV Lengkap <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="footer-container">
+            <!-- Alamat -->
+            <div class="footer-section" data-aos="fade-up">
+                <h3>Alamat Kampus</h3>
+                <p><i class="fas fa-map-marker-alt"></i> F92X+2C6, Jl. Purwodadi Indah</p>
+                <p>No.KM. 10, Sidomulyo Barat</p>
+                <p>Kec. Tampan, Kota Pekanbaru</p>
+                <p>Riau 28294</p>
+            </div>
+
+            <!-- Map -->
+            <div class="footer-section" data-aos="fade-up" data-aos-delay="100">
+                <h3>Lokasi Kampus</h3>
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.6959949379298!2d101.39504367447456!3d0.44866326381065347!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31d5aeadd0b5e9ed%3A0x499e4c99ffc29c00!2sUniversitas%20Sains%20dan%20Teknologi%20Indonesia!5e0!3m2!1sid!2sid!4v1737397633593!5m2!1sid!2sid" 
+                        width="100%" 
+                        height="100%" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+
+            <!-- Media Sosial -->
+            <div class="footer-section" data-aos="fade-up" data-aos-delay="200">
+                <h3>Media Sosial</h3>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/zeltia.Toye.08" class="facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/zeltia_gstdrrr/?utm_source=ig_web_button_share_sheet" class="instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.tiktok.com/@nyaaaa138?_t=ZS-8tEZQ9SeI5f&_r=1" class="tiktok"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- AOS Script -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+    </script>
+
+    <!-- Add Script for Mobile Menu -->
+    <script>
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            document.querySelector('.nav-menu').classList.toggle('active');
+        });
+    </script>
+
+    <!-- Add Parallax Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Parallax effect hanya untuk background cover
+            window.addEventListener('scroll', function() {
+                const scrolled = window.pageYOffset;
+                const cover = document.querySelector('.cover::before');
+                if (cover) {
+                    cover.style.transform = `translateY(${scrolled * 0.5}px)`;
+                }
+            });
+
+            // Smooth scroll untuk scroll indicator
+            document.querySelector('.scroll-indicator').addEventListener('click', function() {
+                const nextSection = document.querySelector('.blog-section');
+                if (nextSection) {
+                    nextSection.scrollIntoView({ 
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
