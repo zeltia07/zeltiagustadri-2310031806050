@@ -69,7 +69,7 @@
             margin: 0 auto;
         }
 
-        /* Navigation Menu */
+        /* Navigation Menu Styles */
         .nav-section {
             background: var(--primary-color);
             position: sticky;
@@ -103,24 +103,47 @@
             align-items: center;
         }
 
-        .nav-menu li a {
-            color: white;
+        .nav-menu a {
+            color: #ffffff;
             text-decoration: none;
-            padding: 20px 25px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            padding: 12px 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
-            font-weight: 500;
+            gap: 12px;
+        }
+
+        .nav-menu a i {
+            font-size: 1.2rem;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             transition: all 0.3s ease;
-            white-space: nowrap;
+            color: #ffffff;
         }
 
-        .nav-menu li a:hover {
-            background: var(--secondary-color);
+        .nav-menu a:hover {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-menu a:hover i {
             transform: translateY(-2px);
+            color: #ffffff;
         }
 
-        .nav-menu .active {
-            background: var(--secondary-color);
+        .nav-menu a.active {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-menu a.active i {
+            color: #ffffff;
         }
 
         /* About Content */
@@ -379,11 +402,11 @@
     <nav class="nav-section">
         <div class="nav-container">
             <ul class="nav-menu">
-                <li><a href="index.html" >Beranda</a></li>
-                <li><a href="tugas.html" >Materi Tugas</a></li>
-                <li><a href="about.html" class="active">Tentang Saya</a></li>
-               
-                <li><a href="#">Kontak</a></li>
+                <li><a href="index.html"><i class="fas fa-home"></i> Beranda</a></li>
+                <li><a href="tugas.html"><i class="fas fa-tasks"></i> Materi Tugas</a></li>
+                <li><a href="index.html#artikel"><i class="fas fa-newspaper"></i> Berita Terkini</a></li>
+                <li><a href="about.html" class="active"><i class="fas fa-user"></i> Tentang Saya</a></li>
+                <li><a href="index.html#contact"><i class="fas fa-envelope"></i> Kontak</a></li>
             </ul>
         </div>
     </nav>
