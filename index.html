@@ -453,45 +453,182 @@
         }
 
         /* Responsive Design */
+        @media (max-width: 1200px) {
+            .blog-container,
+            .articles-container,
+            .featured-container {
+                grid-template-columns: repeat(2, 1fr);
+                padding: 0 20px;
+            }
+
+            .lecturer-card {
+                grid-template-columns: 300px 1fr;
+                padding: 30px;
+                gap: 30px;
+            }
+
+            .lecturer-image {
+                width: 250px;
+                height: 350px;
+            }
+        }
+
+        @media (max-width: 968px) {
+            .cover-content h1 {
+                font-size: clamp(1.8rem, 4vw, 2.5rem);
+            }
+
+            .cover-content p {
+                font-size: clamp(1rem, 2vw, 1.2rem);
+            }
+
+            .blog-container,
+            .articles-container,
+            .featured-container {
+                grid-template-columns: 1fr;
+                max-width: 600px;
+                margin: 0 auto;
+            }
+
+            .blog-card,
+            .article-card {
+                margin-bottom: 30px;
+            }
+
+            .blog-image,
+            .article-image img {
+                height: 250px;
+            }
+
+            .lecturer-card {
+                grid-template-columns: 1fr;
+                text-align: center;
+                max-width: 500px;
+                padding: 30px;
+            }
+
+            .lecturer-image {
+                width: 220px;
+                height: 300px;
+            }
+
+            .lecturer-info h3 {
+                font-size: 2rem;
+            }
+
+            .lecturer-info h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+        }
+
         @media (max-width: 768px) {
             .logo {
                 width: 80px;
             }
 
             .cover {
-                min-height: 60vh;
+                min-height: 80vh;
             }
 
-            .blog-image {
-                height: 200px;
+            .cover-content {
+                padding: 0 15px;
             }
 
-            .footer-section {
+            .blog-section,
+            .articles-section,
+            .lecturer-section {
+                padding: 40px 15px;
+            }
+
+            .blog-content h2,
+            .article-content h3 {
+                font-size: 1.3rem;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .contact-info {
+                order: 2;
+            }
+
+            .contact-form {
+                order: 1;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
                 text-align: center;
-            }
-
-            .footer-section h3::after {
-                left: 50%;
-                transform: translateX(-50%);
             }
 
             .social-links {
                 justify-content: center;
             }
+
+            .map-container {
+                height: 250px;
+            }
         }
 
         @media (max-width: 480px) {
             .cover-content h1 {
-                font-size: 2rem;
+                font-size: 1.5rem;
             }
 
-            .blog-card {
-                margin: 0 auto;
-                max-width: 100%;
+            .cover-content p {
+                font-size: 0.9rem;
             }
 
-            .footer-container {
-                grid-template-columns: 1fr;
+            .blog-image,
+            .article-image img {
+                height: 200px;
+            }
+
+            .blog-content,
+            .article-content {
+                padding: 15px;
+            }
+
+            .lecturer-card {
+                padding: 20px;
+            }
+
+            .lecturer-image {
+                width: 180px;
+                height: 250px;
+            }
+
+            .lecturer-info h3 {
+                font-size: 1.8rem;
+            }
+
+            .position {
+                font-size: 1.1rem;
+            }
+
+            .detail-item {
+                padding: 15px;
+            }
+
+            .detail-item i {
+                font-size: 1.4rem;
+            }
+
+            .detail-item span {
+                font-size: 0.9rem;
+            }
+
+            .lecturer-social a {
+                width: 45px;
+                height: 45px;
+                font-size: 1.2rem;
             }
         }
 
@@ -1143,225 +1280,107 @@
             transform: translateY(-2px);
         }
 
-        /* Responsive Adjustments */
-        @media (max-width: 768px) {
-            .section-header h2 {
-                font-size: 2rem;
-            }
-
-            .featured-container,
-            .articles-container {
-                grid-template-columns: 1fr;
-            }
-
-            .contact-container {
-                grid-template-columns: 1fr;
-            }
-
-            .contact-info {
-                order: 2;
-            }
-
-            .contact-form {
-                order: 1;
-            }
-        }
-
         /* Lecturer Profile Section Styles */
         .lecturer-section {
-            padding: 120px 20px;
+            padding: clamp(60px, 8vw, 120px) 20px;
             background: linear-gradient(135deg, var(--light-bg) 0%, #ffffff 100%);
             position: relative;
             overflow: hidden;
         }
 
-        .lecturer-section::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%230099ff' fill-opacity='0.1' d='M0,96L48,122.7C96,149,192,203,288,208C384,213,480,171,576,149.3C672,128,768,128,864,149.3C960,171,1056,213,1152,213.3C1248,213,1344,171,1392,149.3L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
-            background-size: cover;
-            background-position: center;
-            opacity: 0.3;
-        }
-
-        .section-header {
-            margin-bottom: 60px;
-        }
-
-        .section-header h2 {
-            font-size: 2.8rem;
-            margin-bottom: 20px;
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.1);
-        }
-
         .lecturer-container {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 0 30px;
         }
 
         .lecturer-card {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            border-radius: 40px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
-            overflow: hidden;
+            border-radius: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
             display: grid;
-            grid-template-columns: 450px 1fr;
-            gap: 50px;
-            padding: 50px;
-            position: relative;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            grid-template-columns: minmax(300px, 400px) 1fr;
+            gap: clamp(20px, 4vw, 50px);
+            padding: clamp(20px, 4vw, 40px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .lecturer-card:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 35px 70px rgba(0,0,0,0.2);
-        }
-
-        .lecturer-image-wrapper {
-            position: relative;
-            padding: 30px;
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(52, 152, 219, 0.2);
         }
 
         .lecturer-image {
-            width: 400px;
-            height: 500px;
-            border-radius: 30px;
+            width: 100%;
+            aspect-ratio: 3/4;
+            border-radius: 20px;
             overflow: hidden;
             position: relative;
-            margin: 0 auto;
-            transition: all 0.5s ease;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-        }
-
-        .lecturer-image::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(45deg, 
-                rgba(44, 62, 80, 0.5), 
-                rgba(52, 152, 219, 0.5)
-            );
-            opacity: 0;
-            transition: all 0.5s ease;
-            z-index: 1;
-        }
-
-        .lecturer-image::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 50%;
-            background: linear-gradient(
-                to top,
-                rgba(0,0,0,0.5) 0%,
-                transparent 100%
-            );
-            z-index: 1;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
         }
 
         .lecturer-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: all 0.8s ease;
-            transform-origin: center;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .lecturer-card:hover .lecturer-image img {
-            transform: scale(1.1);
-        }
-
-        .lecturer-card:hover .lecturer-image::before {
-            opacity: 0.6;
+            transform: scale(1.05);
         }
 
         .lecturer-info {
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            gap: 30px;
-            padding: 20px 0;
+            gap: clamp(15px, 3vw, 25px);
+            padding: clamp(10px, 2vw, 20px) 0;
         }
 
         .lecturer-info h3 {
-            font-size: 2.5rem;
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
             color: var(--primary-color);
             margin: 0;
             position: relative;
             padding-bottom: 15px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .lecturer-info h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 80px;
-            height: 4px;
-            background: var(--secondary-color);
-            transition: width 0.3s ease;
-        }
-
-        .lecturer-card:hover .lecturer-info h3::after {
-            width: 150px;
         }
 
         .position {
+            font-size: clamp(1rem, 1.5vw, 1.4rem);
             color: var(--secondary-color);
-            font-size: 1.4rem;
             font-weight: 500;
-            letter-spacing: 1px;
-            transform: translateY(0);
-            transition: all 0.3s ease;
         }
 
         .lecturer-details {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 25px;
-            margin-top: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: clamp(15px, 2vw, 25px);
         }
 
         .detail-item {
             background: rgba(255, 255, 255, 0.9);
-            padding: 25px;
-            border-radius: 20px;
+            padding: clamp(15px, 2vw, 25px);
+            border-radius: 15px;
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 15px;
             transition: all 0.3s ease;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
         }
 
         .detail-item i {
-            font-size: 1.8rem;
+            font-size: clamp(1.4rem, 2vw, 1.8rem);
             color: var(--secondary-color);
-            transition: all 0.3s ease;
         }
 
         .detail-item span {
-            font-size: 1.1rem;
-            color: #666;
-            transition: all 0.3s ease;
+            font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+            color: var(--text-color);
         }
 
         .detail-item:hover {
             background: var(--secondary-color);
-            transform: translateX(15px);
-            box-shadow: 0 12px 30px rgba(52, 152, 219, 0.3);
+            transform: translateX(10px);
         }
 
         .detail-item:hover i,
@@ -1371,90 +1390,34 @@
 
         .lecturer-social {
             display: flex;
-            gap: 25px;
-            margin-top: 40px;
+            gap: 20px;
+            margin-top: clamp(20px, 4vw, 40px);
         }
 
         .lecturer-social a {
-            width: 60px;
-            height: 60px;
+            width: clamp(45px, 5vw, 55px);
+            height: clamp(45px, 5vw, 55px);
             border-radius: 50%;
-            background: var(--light-bg);
             display: flex;
             align-items: center;
             justify-content: center;
-            text-decoration: none;
-            font-size: 1.6rem;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: clamp(1.2rem, 1.5vw, 1.6rem);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-        }
-
-        .lecturer-social a i {
-            position: relative;
-            z-index: 2;
-            transition: all 0.3s ease;
-        }
-
-        .lecturer-social a:nth-child(1) { color: #1877f2; } /* Facebook */
-        .lecturer-social a:nth-child(2) { color: #1da1f2; } /* Twitter */
-        .lecturer-social a:nth-child(3) { color: #0077b5; } /* LinkedIn */
-        .lecturer-social a:nth-child(4) { color: #e4405f; } /* Instagram */
-
-        .lecturer-social a::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            opacity: 0;
-            transform: scale(0);
-            transition: all 0.4s ease;
-            z-index: 1;
-        }
-
-        .lecturer-social a:hover::before {
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        .lecturer-social a:hover {
-            transform: translateY(-8px) scale(1.1);
-            box-shadow: 0 15px 30px rgba(52, 152, 219, 0.3);
-        }
-
-        .lecturer-social a:hover i {
-            color: white;
-            transform: rotate(360deg);
-        }
-
-        @media (max-width: 1200px) {
-            .lecturer-card {
-                grid-template-columns: 400px 1fr;
-                gap: 40px;
-                padding: 40px;
-            }
-
-            .lecturer-image {
-                width: 350px;
-                height: 450px;
-            }
         }
 
         @media (max-width: 968px) {
             .lecturer-card {
                 grid-template-columns: 1fr;
-                max-width: 700px;
+                max-width: 600px;
+                margin: 0 auto;
                 text-align: center;
-                padding: 40px;
             }
 
             .lecturer-image {
-                width: 300px;
-                height: 400px;
+                max-width: 300px;
+                margin: 0 auto;
             }
 
             .lecturer-info h3::after {
@@ -1466,31 +1429,22 @@
                 grid-template-columns: 1fr;
             }
 
-            .lecturer-social {
-                justify-content: center;
-            }
-
             .detail-item:hover {
-                transform: translateY(-8px);
+                transform: translateY(-5px);
             }
         }
 
         @media (max-width: 480px) {
-            .lecturer-image {
-                width: 250px;
-                height: 350px;
-            }
-
             .lecturer-card {
-                padding: 30px 20px;
-            }
-
-            .detail-item {
                 padding: 20px;
             }
 
-            .lecturer-info h3 {
-                font-size: 2rem;
+            .lecturer-image {
+                max-width: 250px;
+            }
+
+            .detail-item {
+                padding: 15px;
             }
         }
     </style>
@@ -1635,10 +1589,8 @@
         </div>
         <div class="lecturer-container">
             <div class="lecturer-card" data-aos="fade-up" data-aos-delay="100">
-                <div class="lecturer-image-wrapper">
-                    <div class="lecturer-image">
-                        <img src="img/dosen.jpg" alt="Dosen Pembimbing">
-                    </div>
+                <div class="lecturer-image">
+                    <img src="img/dosen.jpg" alt="Dosen Pembimbing">
                 </div>
                 <div class="lecturer-info">
                     <h3 data-aos="fade-left" data-aos-delay="200">Dwi Hariyono, M.Kom</h3>
@@ -1646,7 +1598,7 @@
                     <div class="lecturer-details">
                         <div class="detail-item" data-aos="fade-left" data-aos-delay="400">
                             <i class="fas fa-graduation-cap"></i>
-                            <span>S2 Teknik Informatika</span>
+                            <span>S2 Teknologi Informasi</span>
                         </div>
                         <div class="detail-item" data-aos="fade-left" data-aos-delay="500">
                             <i class="fas fa-book"></i>
@@ -1654,11 +1606,11 @@
                         </div>
                         <div class="detail-item" data-aos="fade-left" data-aos-delay="600">
                             <i class="fas fa-envelope"></i>
-                            <span>email.dosen@usti.ac.id</span>
+                            <span>dwihariyono@usti.ac.id</span>
                         </div>
                         <div class="detail-item" data-aos="fade-left" data-aos-delay="700">
                             <i class="fas fa-phone"></i>
-                            <span>+62 812-xxxx-xxxx</span>
+                            <span>+62 852‑7801‑9852</span>
                         </div>
                     </div>
                     <div class="lecturer-social" data-aos="fade-up" data-aos-delay="800">
